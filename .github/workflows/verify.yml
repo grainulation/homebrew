@@ -7,28 +7,69 @@ on:
 permissions:
   contents: read
 jobs:
-  homebrew:
-    name: Installed stable formula / macOS ARM64
+  reviewed:
+    name: Reviewed recipe / ${{ matrix.app }} / macOS ARM64
     runs-on: macos-15
-    timeout-minutes: 20
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - app: irrigator
+            version: "1.0.0"
+          - app: grainulator
+            version: "3.0.0"
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: "1"
+      HOMEBREW_NO_INSTALL_CLEANUP: "1"
+      APP: ${{ matrix.app }}
+      EXPECTED_VERSION: ${{ matrix.version }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - name: Check Ruby syntax
-        run: ruby -c Formula/irrigator.rb
+        run: ruby -c "Formula/$APP.rb"
       - name: Register exact reviewed local tap
-        env:
-          HOMEBREW_NO_AUTO_UPDATE: "1"
         run: brew tap grainulation/homebrew "$GITHUB_WORKSPACE"
-      - name: Install and exercise stable published archive
-        env:
-          HOMEBREW_NO_AUTO_UPDATE: "1"
-          HOMEBREW_NO_INSTALL_CLEANUP: "1"
+      - name: Install published archive through reviewed recipe
         run: |
-          brew install grainulation/homebrew/irrigator
-          brew test grainulation/homebrew/irrigator
-          test "$(irrigator version)" = "1.0.0"
+          brew install "grainulation/homebrew/$APP"
+          brew test "grainulation/homebrew/$APP"
+          test "$("$APP" version)" = "$EXPECTED_VERSION"
       - name: Remove formula
         if: always()
-        run: brew uninstall grainulation/homebrew/irrigator
+        run: brew uninstall "grainulation/homebrew/$APP"
+
+  public:
+    name: Public main install / ${{ matrix.app }} / macOS ARM64
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: macos-15
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - app: irrigator
+            version: "1.0.0"
+          - app: grainulator
+            version: "3.0.0"
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: "1"
+      HOMEBREW_NO_INSTALL_CLEANUP: "1"
+      APP: ${{ matrix.app }}
+      EXPECTED_VERSION: ${{ matrix.version }}
+      EXPECTED_TAP_SHA: ${{ github.sha }}
+    steps:
+      - name: Fetch public tap over the network
+        run: |
+          brew tap grainulation/homebrew https://github.com/grainulation/homebrew
+          test "$(git -C "$(brew --repository grainulation/homebrew)" rev-parse HEAD)" = "$EXPECTED_TAP_SHA"
+      - name: Install and exercise public stable formula
+        run: |
+          brew install "grainulation/homebrew/$APP"
+          brew test "grainulation/homebrew/$APP"
+          test "$("$APP" version)" = "$EXPECTED_VERSION"
+      - name: Remove formula
+        if: always()
+        run: brew uninstall "grainulation/homebrew/$APP"

@@ -29,17 +29,23 @@ installed workflows. Private-prefix recipe tests, fresh public-channel
 installation, cross-compilation, native execution and full agent-host
 discovery establish different evidence; record which ran.
 
-The tap's workflow installs and tests the stable Irrigator archive on a clean
-macOS ARM64 runner. Other advertised application targets need their own native
+The tap's workflow checks both applications on fresh macOS ARM64 runners.
+Pull requests install the published archives using the exact reviewed local
+recipes. After a main-branch merge, separate jobs fetch the public tap over the
+network, require its commit to match the triggering main commit, then install,
+test and check each exact version. Public-channel results come from those
+separate jobs. Other advertised application targets need their own native
 acceptance. A successful native binary build does not establish that Homebrew
 and its dependencies support every OS/prefix combination.
 
-## Grainulator 3 rollout
+## Grainulator native runtime
 
-Add the stable Grainulator formula after the matching verified 3.0 base/native
-release assets are published. Test a fresh fully qualified installation before
-advertising the channel. The initial candidate workflow simulates upgrade and
-cleanup behavior; verify the first real public upgrade when two versions exist.
+The Grainulator formula pins the published base archive, release manifest and
+all four native targets. Carry the independently reviewed manifest digest from
+the release job when generating an update. Test a fresh fully qualified
+installation before advertising a new channel. Candidate checks simulate
+upgrade and cleanup behavior; verify the first real public upgrade when two
+versions exist.
 
 Keep the immutable application tree intact. Formula wrappers select the declared
 Node and matching formula-owned native asset; they do not rewrite shipped files
