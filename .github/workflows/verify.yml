@@ -35,8 +35,11 @@ jobs:
       - name: Install published archive through reviewed recipe
         run: |
           brew install "grainulation/homebrew/$APP"
-          brew test "grainulation/homebrew/$APP"
+          brew test --verbose "grainulation/homebrew/$APP"
           test "$("$APP" version)" = "$EXPECTED_VERSION"
+      - name: Inspect installed Grainulator after failure
+        if: failure() && matrix.app == 'grainulator'
+        run: grainulator doctor --json
       - name: Remove formula
         if: always()
         run: brew uninstall "grainulation/homebrew/$APP"
@@ -68,8 +71,11 @@ jobs:
       - name: Install and exercise public stable formula
         run: |
           brew install "grainulation/homebrew/$APP"
-          brew test "grainulation/homebrew/$APP"
+          brew test --verbose "grainulation/homebrew/$APP"
           test "$("$APP" version)" = "$EXPECTED_VERSION"
+      - name: Inspect installed Grainulator after failure
+        if: failure() && matrix.app == 'grainulator'
+        run: grainulator doctor --json
       - name: Remove formula
         if: always()
         run: brew uninstall "grainulation/homebrew/$APP"
