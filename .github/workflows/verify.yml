@@ -35,6 +35,10 @@ jobs:
       - name: Install published archive through reviewed recipe
         run: |
           brew install "grainulation/homebrew/$APP"
+          if [ "$APP" = irrigator ]; then
+            app_prefix=$(brew --prefix "grainulation/homebrew/$APP")
+            ruby -rjson -rdigest -e 'prefix = ARGV.fetch(0); provenance = JSON.parse(File.read("#{prefix}/share/irrigator/provenance.json")); abort "Installed Irrigator bytes differ from archive provenance" unless Digest::SHA256.file("#{prefix}/bin/irrigator").hexdigest == provenance.fetch("binary_sha256"); puts "PASS installed Irrigator binary matches archive provenance"' "$app_prefix"
+          fi
           brew test --verbose "grainulation/homebrew/$APP"
           test "$("$APP" version)" = "$EXPECTED_VERSION"
       - name: Inspect installed Grainulator after failure
@@ -71,6 +75,10 @@ jobs:
       - name: Install and exercise public stable formula
         run: |
           brew install "grainulation/homebrew/$APP"
+          if [ "$APP" = irrigator ]; then
+            app_prefix=$(brew --prefix "grainulation/homebrew/$APP")
+            ruby -rjson -rdigest -e 'prefix = ARGV.fetch(0); provenance = JSON.parse(File.read("#{prefix}/share/irrigator/provenance.json")); abort "Installed Irrigator bytes differ from archive provenance" unless Digest::SHA256.file("#{prefix}/bin/irrigator").hexdigest == provenance.fetch("binary_sha256"); puts "PASS installed Irrigator binary matches archive provenance"' "$app_prefix"
+          fi
           brew test --verbose "grainulation/homebrew/$APP"
           test "$("$APP" version)" = "$EXPECTED_VERSION"
       - name: Inspect installed Grainulator after failure
