@@ -1,78 +1,83 @@
-# Grainulation Homebrew
+<p align="center">
+  <a href="https://irrigator.dev"><img src="https://raw.githubusercontent.com/grainulation/irrigator/main/docs/mascot.png" alt="Irrigator mascot" width="130"></a>
+  &nbsp;&nbsp;&nbsp;
+  <a href="https://grainulator.dev"><img src="https://raw.githubusercontent.com/grainulation/grainulator/main/public/glitchy.png" alt="Glitchy, the Grainulator mascot" width="150"></a>
+</p>
 
-Shared Homebrew recipes for [Irrigator](https://github.com/grainulation/irrigator)
-and [Grainulator](https://github.com/grainulation/grainulator).
+<h1 align="center">Grainulation Homebrew</h1>
 
-## Install Irrigator
+<p align="center"><strong>Grainulation tools, installed with Homebrew.</strong></p>
 
-This repository has a nonstandard tap name, so include the explicit URL once:
+<p align="center">
+  <a href="https://brew.sh"><img src="https://img.shields.io/badge/Homebrew-tap-fbb040?logo=homebrew&logoColor=white" alt="Homebrew tap"></a>
+  <a href="https://github.com/grainulation/homebrew/actions/workflows/verify.yml"><img src="https://github.com/grainulation/homebrew/actions/workflows/verify.yml/badge.svg?branch=main" alt="Formula installation checks"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="MIT license"></a>
+</p>
 
-    brew tap grainulation/homebrew https://github.com/grainulation/homebrew
-    brew install grainulation/homebrew/irrigator
-    irrigator version
-    irrigator demo --run ./first-irrigator-demo
+<p align="center">
+  <a href="#install">Install</a> ·
+  <a href="#available-formulae">Formulae</a> ·
+  <a href="#updating">Updating</a> ·
+  <a href="docs/MAINTAINING.md">Maintaining the tap</a>
+</p>
 
-Use a new demo directory. The demo uses a mock provider and requires no model
-credentials. It creates local run artifacts.
+---
 
-The stable formula installs the actual published **1.0.0** archives. Irrigator
-1.1.0 is available as tagged source, but its published release currently has
-no binary archives; the stable formula does not claim to install it. Each
-archive has a literal checksum and frozen source identity in the formula.
-Checksums detect byte changes; the archives are unsigned.
+## Install
 
-The optional development build uses current main and a Homebrew Go compiler:
+Requires [Homebrew](https://brew.sh) on macOS or Linux.
 
-    brew install --HEAD grainulation/homebrew/irrigator
+```sh
+brew tap grainulation/homebrew https://github.com/grainulation/homebrew
+brew install grainulation/homebrew/irrigator
+```
 
-Development HEAD is mutable and distinct from the pinned stable release.
-Native runtime archives cover macOS/Linux ARM64 and x86_64. Homebrew support
-also depends on the OS and Homebrew's own platform/dependency support; native
-Windows is unsupported. Windows users can use the Linux app within WSL2.
+Then try Irrigator with mock workers:
 
-## Upgrade and remove
+```sh
+irrigator demo --run ./first-irrigator-demo
+```
 
-    brew upgrade grainulation/homebrew/irrigator
-    brew test grainulation/homebrew/irrigator
-    brew uninstall grainulation/homebrew/irrigator
+The demo needs no model credentials. Choose a new run directory each time.
 
-Uninstall removes this copy of the CLI. Keep run directories, checkpoints,
-exports, credentials and host/plugin configuration under your own control;
-this formula never deletes them or performs agent setup.
+## Available formulae
 
-For a copy installed from the older application-owned tap, inspect
-brew list --formula --full-name and preserve any local formula customizations.
-Add this shared tap explicitly before changing the installed formula:
+| Tool | What it does | Homebrew status |
+| --- | --- | --- |
+| [Irrigator](https://github.com/grainulation/irrigator) | Durable local workflows for coding agents. | [1.0.0 stable](Formula/irrigator.rb) |
+| [Grainulator](https://github.com/grainulation/grainulator) | Evidence and verification for model-assisted work. | Planned with the 3.0 release |
 
-    brew tap grainulation/homebrew https://github.com/grainulation/homebrew
-    brew reinstall grainulation/homebrew/irrigator
+Irrigator installs a prebuilt CLI; Go is not required. Its 1.1.0 release is
+currently source-only, so the stable formula stays on 1.0.0.
+[Installation details and development builds →](docs/INSTALLATION.md)
 
-Check the reported formula owner and version before removing an unused old tap.
-Do not remove unrelated formulas or assume a package update refreshes an
-already-running host/plugin.
+For Grainulator today, use its [installation guide](https://github.com/grainulation/grainulator/blob/main/docs/INSTALLATION.md).
+Its Brew formula will follow the verified 3.0 release assets.
 
-## Grainulator 3
+## Updating
 
-Grainulator's application PR prepares canonical v3 CLI/native archives and a
-verified formula generator. A stable grainulator formula will be added here
-after the matching release assets are published and a fresh channel install
-passes. There is no working Grainulator 3 Brew command yet; no placeholder
-formula or checksums are advertised.
+```sh
+brew update
+brew upgrade grainulation/homebrew/irrigator
+```
 
-Application candidate tests cover offline CLI/MCP behavior, verified native
-assets and explicit enrolled hooks. Installing a formula does not configure
-agent hosts, migrate existing data, enroll hooks or call model providers.
+Check the installed version or remove the CLI:
 
-## Maintainers
+```sh
+irrigator version
+brew uninstall grainulation/homebrew/irrigator
+```
 
-Generate Irrigator's formula using tools/homebrew_formula.py in its source
-repository with all four frozen native candidates and the published SHA256SUMS.
-Generate Grainulator's formula using scripts/homebrew-formula.mjs with its
-complete trusted release manifest and exact candidate assets. Do not rebuild
-or move the runtime tag to include its own formula hashes.
+Your run directories and exported results stay where you saved them.
+[Moving from the old tap →](docs/INSTALLATION.md#moving-from-the-old-tap)
 
-Review the generated formula and exact bytes, run the application's recipe
-verification, publish only separately authorized passing release assets, and
-then advance this tap in a distribution-only commit. Run a fresh fully qualified
-install before describing a new channel/version as verified. Never copy an
-archive's adjacent checksum as independent proof of publisher authenticity.
+## Contributing
+
+Formula fixes and updates are welcome. Start with the
+[maintenance guide](docs/MAINTAINING.md) for release checks and recipe verification.
+
+Report application issues in [Irrigator](https://github.com/grainulation/irrigator/issues)
+or [Grainulator](https://github.com/grainulation/grainulator/issues);
+report installation-recipe issues [here](https://github.com/grainulation/homebrew/issues).
+
+[MIT license](LICENSE).
