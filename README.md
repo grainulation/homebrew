@@ -16,7 +16,8 @@
   <a href="#install">Install</a> ·
   <a href="#available-formulae">Formulae</a> ·
   <a href="#updating">Updating</a> ·
-  <a href="docs/MAINTAINING.md">Maintaining the tap</a>
+  <a href="docs/MAINTAINING.md">Maintaining the tap</a> ·
+  <a href="SECURITY.md">Security</a>
 </p>
 
 ---
@@ -77,5 +78,7 @@ Formula fixes and updates are welcome. Start with the
 Report application issues in [Irrigator](https://github.com/grainulation/irrigator/issues)
 or [Grainulator](https://github.com/grainulation/grainulator/issues);
 report installation-recipe issues [here](https://github.com/grainulation/homebrew/issues).
+For sensitive formula or installation-integrity problems, use the private route
+in [SECURITY.md](SECURITY.md).
 
 [MIT license](LICENSE).
