@@ -1,7 +1,5 @@
 <p align="center">
-  <a href="https://irrigator.dev"><img src="https://raw.githubusercontent.com/grainulation/irrigator/main/docs/mascot.png" alt="Irrigator mascot" width="130"></a>
-  &nbsp;&nbsp;&nbsp;
-  <a href="https://grainulator.dev"><img src="https://raw.githubusercontent.com/grainulation/grainulator/main/public/glitchy.png" alt="Glitchy, the Grainulator mascot" width="150"></a>
+  <a href="https://github.com/grainulation/homebrew"><img src="docs/mascot.png" alt="Grainulation Homebrew logo" width="180"></a>
 </p>
 
 <h1 align="center">Grainulation Homebrew</h1>
