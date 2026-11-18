@@ -1,8 +1,8 @@
 <p align="center">
-  <a href="https://github.com/grainulation/homebrew"><img src="docs/mascot.png" alt="Grainulation Homebrew logo" width="180"></a>
+  <a href="https://github.com/grainulation/homebrew"><img src="docs/mascot.png" alt="Homebrew logo" width="180"></a>
 </p>
 
-<h1 align="center">Grainulation Homebrew</h1>
+<h1 align="center">Homebrew</h1>
 
 <p align="center"><strong>Grainulation tools, installed with Homebrew.</strong></p>
 
