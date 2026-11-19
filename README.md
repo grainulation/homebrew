@@ -52,7 +52,7 @@ currently source-only, so the stable formula stays on 1.0.0.
 
 Grainulator 3.0.0 is available from its [GitHub release](https://github.com/grainulation/grainulator/releases/tag/v3.0.0).
 Its Homebrew formula is pending verification and promotion of the web-free 3.0.1
-update. Use the [installation guide](https://github.com/grainulation/grainulator/blob/main/docs/INSTALLATION.md)
+update. Use the [installation guide](https://github.com/grainulation/grainulator/blob/v3.0.0/docs/INSTALLATION.md)
 for the available GitHub install path.
 
 ## Updating
