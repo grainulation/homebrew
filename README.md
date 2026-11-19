@@ -44,14 +44,16 @@ The demo needs no model credentials. Choose a new run directory each time.
 | Tool | What it does | Homebrew status |
 | --- | --- | --- |
 | [Irrigator](https://github.com/grainulation/irrigator) | Durable local workflows for coding agents. | [1.0.0 stable](Formula/irrigator.rb) |
-| [Grainulator](https://github.com/grainulation/grainulator) | Evidence and verification for model-assisted work. | Planned with the 3.0 release |
+| [Grainulator](https://github.com/grainulation/grainulator) | Evidence and verification for model-assisted work. | [3.0.0 released on GitHub](https://github.com/grainulation/grainulator/releases/tag/v3.0.0); Homebrew pending verification and promotion of web-free 3.0.1 |
 
 Irrigator installs a prebuilt CLI; Go is not required. Its 1.1.0 release is
 currently source-only, so the stable formula stays on 1.0.0.
 [Installation details and development builds →](docs/INSTALLATION.md)
 
-For Grainulator today, use its [installation guide](https://github.com/grainulation/grainulator/blob/main/docs/INSTALLATION.md).
-Its Brew formula will follow the verified 3.0 release assets.
+Grainulator 3.0.0 is available from its [GitHub release](https://github.com/grainulation/grainulator/releases/tag/v3.0.0).
+Its Homebrew formula is pending verification and promotion of the web-free 3.0.1
+update. Use the [installation guide](https://github.com/grainulation/grainulator/blob/main/docs/INSTALLATION.md)
+for the available GitHub install path.
 
 ## Updating
 
