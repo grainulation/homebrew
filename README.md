@@ -28,49 +28,48 @@ Requires [Homebrew](https://brew.sh) on macOS or Linux.
 
 ```sh
 brew tap grainulation/homebrew https://github.com/grainulation/homebrew
-brew install grainulation/homebrew/irrigator grainulation/homebrew/grainulator
+brew install grainulation/homebrew/irrigator
 ```
 
-Try the credential-free demos:
+Then try Irrigator with mock workers:
 
 ```sh
 irrigator demo --run ./first-irrigator-demo
-grainulator demo --dir ./first-grainulator-demo
 ```
 
-The demos need no model credentials. Choose new directories each time.
+The demo needs no model credentials. Choose a new run directory each time.
 
 ## Available formulae
 
 | Tool | What it does | Homebrew status |
 | --- | --- | --- |
 | [Irrigator](https://github.com/grainulation/irrigator) | Durable local workflows for coding agents. | [1.0.0 stable](Formula/irrigator.rb) |
-| [Grainulator](https://github.com/grainulation/grainulator) | Evidence and verification for model-assisted work. | [3.0.0 stable](Formula/grainulator.rb) |
+| [Grainulator](https://github.com/grainulation/grainulator) | Evidence and verification for model-assisted work. | [3.0.0 released on GitHub](https://github.com/grainulation/grainulator/releases/tag/v3.0.0); Homebrew pending verification and promotion of web-free 3.0.1 |
 
 Irrigator installs a prebuilt CLI; Go is not required. Its 1.1.0 release is
 currently source-only, so the stable formula stays on 1.0.0.
 [Installation details and development builds →](docs/INSTALLATION.md)
 
-Grainulator installs the prebuilt native runtime and declares Node 24 as a
-Homebrew dependency. Agent-host setup and native-hook enrollment are explicit
-steps in its [installation guide](https://github.com/grainulation/grainulator/blob/main/docs/INSTALLATION.md).
+Grainulator 3.0.0 is available from its [GitHub release](https://github.com/grainulation/grainulator/releases/tag/v3.0.0).
+Its Homebrew formula is pending verification and promotion of the web-free 3.0.1
+update. Use the [installation guide](https://github.com/grainulation/grainulator/blob/v3.0.0/docs/INSTALLATION.md)
+for the available GitHub install path.
 
 ## Updating
 
 ```sh
 brew update
-brew upgrade grainulation/homebrew/irrigator grainulation/homebrew/grainulator
+brew upgrade grainulation/homebrew/irrigator
 ```
 
 Check the installed version or remove the CLI:
 
 ```sh
 irrigator version
-grainulator version
-brew uninstall grainulation/homebrew/irrigator grainulation/homebrew/grainulator
+brew uninstall grainulation/homebrew/irrigator
 ```
 
-Your run directories, evidence and exported results stay where you saved them.
+Your run directories and exported results stay where you saved them.
 [Moving from the old tap →](docs/INSTALLATION.md#moving-from-the-old-tap)
 
 ## Contributing
