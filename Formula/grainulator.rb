@@ -2,32 +2,32 @@ class Grainulator < Formula
   desc "Evidence and verified execution tools for model-assisted work"
   homepage "https://grainulator.dev"
   license "MIT"
-  # Frozen source commit: 8acbedffe49f8dd6d77d547615d1f13da36e8bb6
+  # Frozen source commit: 54d33de8b70e3dd5398c42fe16f0c1aa7c6097a7
   # Generate only from independently reviewed, passing candidate bytes.
-  url "https://github.com/grainulation/grainulator/releases/download/v3.0.0/grainulator-3.0.0.tgz"
-  sha256 "8913dbf10978f66d6d5691b5b1c1cd3a17c6af514faa0b26c620bb120b46619d"
-  version "3.0.0"
+  url "https://github.com/grainulation/grainulator/releases/download/v3.0.1/grainulator-3.0.1.tgz"
+  sha256 "3d23f07476a36750df5b9ae2b612d802a720efb83ad86480ae0bbeaf763c39b1"
+  version "3.0.1"
   # v3 supports tested Node 24/26 LTS; pin the minimum supported LTS for this channel.
   depends_on "node@24"
   # The wrapper selects Node explicitly; preserve manifest-verified application bytes.
   skip_clean "libexec/app"
 
   resource "release-manifest" do
-    url "https://github.com/grainulation/grainulator/releases/download/v3.0.0/release-manifest.json"
-    sha256 "5816b1f7f4fb6c9060851c561f8c7c9c2a30715ff09133efc5df0519bcbe3afd"
+    url "https://github.com/grainulation/grainulator/releases/download/v3.0.1/release-manifest.json"
+    sha256 "e027684160ff39b1baeeb2dce925965c97ebefa7d9b92facc8ef4263ff364268"
   end
 
   on_macos do
     on_arm do
       resource "native-runtime" do
-        url "https://github.com/grainulation/grainulator/releases/download/v3.0.0/grainulator-runtime-3.0.0-aarch64-apple-darwin.tar.gz"
-        sha256 "03def6d44b8ee2379026521adaca37552185b8474ba36fccf42476809d5cc9bf"
+        url "https://github.com/grainulation/grainulator/releases/download/v3.0.1/grainulator-runtime-3.0.1-aarch64-apple-darwin.tar.gz"
+        sha256 "4a6c58d609ae9ddff052b9f6856addaee52954d9df012b06fe03e5d83107485e"
       end
     end
     on_intel do
       resource "native-runtime" do
-        url "https://github.com/grainulation/grainulator/releases/download/v3.0.0/grainulator-runtime-3.0.0-x86_64-apple-darwin.tar.gz"
-        sha256 "64e217fc6db3824bfb82fc01c12c2810361edf43d6ac4510b3dacfc7cee3be1c"
+        url "https://github.com/grainulation/grainulator/releases/download/v3.0.1/grainulator-runtime-3.0.1-x86_64-apple-darwin.tar.gz"
+        sha256 "a71a2f8deb2ba8a600f835631b4f8b4e5a76d1ba020b527f01941f519e6b967a"
       end
     end
   end
@@ -35,14 +35,14 @@ class Grainulator < Formula
   on_linux do
     on_arm do
       resource "native-runtime" do
-        url "https://github.com/grainulation/grainulator/releases/download/v3.0.0/grainulator-runtime-3.0.0-aarch64-unknown-linux-musl.tar.gz"
-        sha256 "d2e70c69498b2901f3c057fe7d732cfd7fdd301ae4c0d8b949876df46e2275e0"
+        url "https://github.com/grainulation/grainulator/releases/download/v3.0.1/grainulator-runtime-3.0.1-aarch64-unknown-linux-musl.tar.gz"
+        sha256 "a593f132ab9a77011d1b3edb7fd8e177c759852156953e444a85ad198f5118b9"
       end
     end
     on_intel do
       resource "native-runtime" do
-        url "https://github.com/grainulation/grainulator/releases/download/v3.0.0/grainulator-runtime-3.0.0-x86_64-unknown-linux-musl.tar.gz"
-        sha256 "646bbead178ddcaf0ce33c8dd3c5c058d36b2eb29bdb29c205ac8846b4b5a89a"
+        url "https://github.com/grainulation/grainulator/releases/download/v3.0.1/grainulator-runtime-3.0.1-x86_64-unknown-linux-musl.tar.gz"
+        sha256 "e32e232387f14a11926e7cffb43a42772487e75d1d76fee5b499317668864591"
       end
     end
   end
@@ -55,7 +55,7 @@ class Grainulator < Formula
     manifest = JSON.parse(manifest_bytes)
     target = (libexec/"native/runtime-asset.json").read.then { |value| JSON.parse(value).fetch("target") }
     asset = manifest.fetch("assets").find { |item| item.fetch("target") == target }
-    receipt = { schema: "grainulator.runtime.install.v1", manifest_sha256: "5816b1f7f4fb6c9060851c561f8c7c9c2a30715ff09133efc5df0519bcbe3afd",
+    receipt = { schema: "grainulator.runtime.install.v1", manifest_sha256: "e027684160ff39b1baeeb2dce925965c97ebefa7d9b92facc8ef4263ff364268",
                 manifest: [manifest_bytes].pack("m0"), archive_sha256: asset.fetch("sha256") }
     (libexec/"native/.install-receipt.json").write JSON.generate(receipt) + "\n"
     bin.mkpath

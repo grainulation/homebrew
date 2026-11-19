@@ -18,10 +18,7 @@ The stable formulas select published prebuilt archives for macOS or Linux on
 ARM64 or x86_64. Homebrew also needs to support your OS and machine. Native
 Windows is unsupported; use Linux within WSL2.
 
-The pinned stable versions are Irrigator 1.0.0 and Grainulator 3.0.0.
-Irrigator 1.1.0 has tagged source but no published CLI archives. Formula promotion
-follows verified release assets rather than switching to a different build
-under the same version.
+The stable versions are Irrigator 1.2.0 and Grainulator 3.0.1.
 
 Grainulator requires Node 24; Homebrew installs that dependency. Its formula
 also selects the matching prebuilt native runtime. It does not run Cargo or
@@ -44,8 +41,9 @@ brew upgrade --fetch-HEAD grainulation/homebrew/irrigator
 
 ## Moving from the old tap
 
-Inspect `brew list --formula --full-name` and preserve any local formula
-customizations. Add this shared tap explicitly, then reinstall:
+Use this shared tap for updates from older taps or formulas copied from
+application checkouts. Inspect `brew list --formula --full-name` and preserve
+any local formula customizations. Add this shared tap explicitly, then reinstall:
 
 ```sh
 brew tap grainulation/homebrew https://github.com/grainulation/homebrew
@@ -66,5 +64,5 @@ Uninstalling this formula leaves run directories, checkpoints, exports,
 credentials and host settings under your control. Grainulator keeps explicitly
 enrolled native hooks separate from disposable Brew kegs; it does not enroll or
 detach hooks during package installation/removal. See its
-[native-runtime guide](https://github.com/grainulation/grainulator/blob/main/docs/RUNTIME.md)
+[native-runtime guide](https://github.com/grainulation/grainulator/blob/v3.0.1/docs/RUNTIME.md)
 for retained assets and explicit enrollment.

@@ -5,6 +5,10 @@ stable URL and SHA-256 must refer to an immutable published archive. Checksums
 identify bytes; unsigned checksums and provenance alone do not authenticate the
 publisher.
 
+The maintained `Formula/*.rb` recipes live in this shared tap. Application
+repositories own the generators, build checks and public release inputs. Commit
+generated recipe updates here.
+
 ## Prepare a formula update
 
 Generate Irrigator's formula from its application repository using
@@ -43,9 +47,14 @@ and its dependencies support every OS/prefix combination.
 The Grainulator formula pins the published base archive, release manifest and
 all four native targets. Carry the independently reviewed manifest digest from
 the release job when generating an update. Test a fresh fully qualified
-installation before advertising a new channel. Candidate checks simulate
-upgrade and cleanup behavior; verify the first real public upgrade when two
-versions exist.
+installation before advertising a new channel.
+
+The upgrade job installs the reviewed 3.0.0 recipe from an immutable commit,
+then upgrades its published archives to 3.0.1 and removes the old keg. It checks
+user-data hashes and the stable MCP registration and launcher. This is a
+reviewed-recipe/public-archive upgrade; the older recipe was never promoted to
+tap main. Fresh public-main installation and full agent-host discovery are
+separate checks.
 
 Keep the immutable application tree intact. Formula wrappers select the declared
 Node and matching formula-owned native asset; they do not rewrite shipped files
