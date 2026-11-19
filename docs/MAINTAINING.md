@@ -5,6 +5,10 @@ stable URL and SHA-256 must refer to an immutable published archive. Checksums
 identify bytes; unsigned checksums and provenance alone do not authenticate the
 publisher.
 
+The maintained `Formula/*.rb` recipes live in this shared tap. Application
+repositories own the generators, build checks and public release inputs. Commit
+generated recipe updates here.
+
 ## Prepare a formula update
 
 Generate Irrigator's formula from its application repository using
@@ -29,17 +33,28 @@ installed workflows. Private-prefix recipe tests, fresh public-channel
 installation, cross-compilation, native execution and full agent-host
 discovery establish different evidence; record which ran.
 
-The tap's workflow installs and tests the stable Irrigator archive on a clean
-macOS ARM64 runner. Other advertised application targets need their own native
+The tap's workflow checks both applications on fresh macOS ARM64 runners.
+Pull requests install the published archives using the exact reviewed local
+recipes. After a main-branch merge, separate jobs fetch the public tap over the
+network, require its commit to match the triggering main commit, then install,
+test and check each exact version. Public-channel results come from those
+separate jobs. Other advertised application targets need their own native
 acceptance. A successful native binary build does not establish that Homebrew
 and its dependencies support every OS/prefix combination.
 
-## Grainulator 3 rollout
+## Grainulator native runtime
 
-Add the stable Grainulator formula after the matching verified 3.0 base/native
-release assets are published. Test a fresh fully qualified installation before
-advertising the channel. The initial candidate workflow simulates upgrade and
-cleanup behavior; verify the first real public upgrade when two versions exist.
+The Grainulator formula pins the published base archive, release manifest and
+all four native targets. Carry the independently reviewed manifest digest from
+the release job when generating an update. Test a fresh fully qualified
+installation before advertising a new channel.
+
+The upgrade job installs the reviewed 3.0.0 recipe from an immutable commit,
+then upgrades its published archives to 3.0.1 and removes the old keg. It checks
+user-data hashes and the stable MCP registration and launcher. This is a
+reviewed-recipe/public-archive upgrade; the older recipe was never promoted to
+tap main. Fresh public-main installation and full agent-host discovery are
+separate checks.
 
 Keep the immutable application tree intact. Formula wrappers select the declared
 Node and matching formula-owned native asset; they do not rewrite shipped files
