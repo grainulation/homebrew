@@ -4,29 +4,29 @@ class Irrigator < Formula
   license "MIT"
 
   # BEGIN GENERATED STABLE RELEASE
-  # Frozen runtime commit: 042e27e7a3011480192e65ff20668956df4cc355
-  # Source SHA-256: 26d54b7acc155d6cbf61824b0e9d306cd14bf45eae1872e77c33bbb1003bbb93
-  version "1.2.0"
+  # Frozen runtime commit: afc3338cb1f43dc0feac1901f83474d7befc0763
+  # Source SHA-256: fb969ec14132232da7870bea686d2ae088a2adaf86ba6d8bbf0ad4c588b8824a
+  version "1.2.1"
 
   on_macos do
     on_arm do
-      url "https://github.com/grainulation/irrigator/releases/download/v1.2.0/irrigator-1.2.0-darwin-arm64.tar.gz"
-      sha256 "8e9ccdc21bcff384ece6068a968746dc64d1b173901492a7f349939b01c3b0a5"
+      url "https://github.com/grainulation/irrigator/releases/download/v1.2.1/irrigator-1.2.1-darwin-arm64.tar.gz"
+      sha256 "c40270c0216b133da353c20230470053bb8e9ac25769094b932fcbef88a258f9"
     end
     on_intel do
-      url "https://github.com/grainulation/irrigator/releases/download/v1.2.0/irrigator-1.2.0-darwin-amd64.tar.gz"
-      sha256 "07872d91ffb25da207bd42b6df787f65eae10d92a53dbc3a6af4f2dca97af5af"
+      url "https://github.com/grainulation/irrigator/releases/download/v1.2.1/irrigator-1.2.1-darwin-amd64.tar.gz"
+      sha256 "70b3a5ba0ab8a8d256593656762f62eb0872252f21b2a219e259af5db33d010a"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/grainulation/irrigator/releases/download/v1.2.0/irrigator-1.2.0-linux-arm64.tar.gz"
-      sha256 "f15ac1369bf38654371a27ecbff1aa523c53d80efb379b685c620329b0e44a5c"
+      url "https://github.com/grainulation/irrigator/releases/download/v1.2.1/irrigator-1.2.1-linux-arm64.tar.gz"
+      sha256 "3c184edb8a9dac12b04775c5c1fb910ca7786294adfb13ce8e913b2b6de52dce"
     end
     on_intel do
-      url "https://github.com/grainulation/irrigator/releases/download/v1.2.0/irrigator-1.2.0-linux-amd64.tar.gz"
-      sha256 "7cc8e9b41f3647fae6aff7de8994ab4766aed47cdf154b76bd03f4d11f1d5804"
+      url "https://github.com/grainulation/irrigator/releases/download/v1.2.1/irrigator-1.2.1-linux-amd64.tar.gz"
+      sha256 "76c8b7bb356db9daad8ea64c3e63f3232302cf2837e58c21e874d3a2bb880333"
     end
   end
   # END GENERATED STABLE RELEASE
