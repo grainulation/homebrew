@@ -44,7 +44,7 @@ The demos need no model credentials. Choose new directories each time.
 
 | Tool | What it does | Homebrew status |
 | --- | --- | --- |
-| [Irrigator](https://github.com/grainulation/irrigator) | Durable local workflows for coding agents. | [1.2.1 stable](Formula/irrigator.rb) |
+| [Irrigator](https://github.com/grainulation/irrigator) | Durable local workflows for coding agents. | [1.3.1 stable](Formula/irrigator.rb) |
 | [Grainulator](https://github.com/grainulation/grainulator) | Evidence and verification for model-assisted work. | [3.0.1 stable](Formula/grainulator.rb) |
 
 Irrigator installs a prebuilt CLI; Go is not required. Homebrew installs Node 24

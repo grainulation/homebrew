@@ -16,7 +16,7 @@ jobs:
       matrix:
         include:
           - app: irrigator
-            version: "1.2.1"
+            version: "1.3.1"
           - app: grainulator
             version: "3.0.1"
     env:
@@ -58,7 +58,7 @@ jobs:
       matrix:
         include:
           - app: irrigator
-            version: "1.2.1"
+            version: "1.3.1"
           - app: grainulator
             version: "3.0.1"
     env:
