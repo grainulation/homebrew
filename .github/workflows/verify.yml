@@ -16,9 +16,9 @@ jobs:
       matrix:
         include:
           - app: irrigator
-            version: "1.3.1"
+            version: "1.3.2"
           - app: grainulator
-            version: "3.0.1"
+            version: "3.2.0"
     env:
       HOMEBREW_NO_AUTO_UPDATE: "1"
       HOMEBREW_NO_INSTALL_CLEANUP: "1"
@@ -58,9 +58,9 @@ jobs:
       matrix:
         include:
           - app: irrigator
-            version: "1.3.1"
+            version: "1.3.2"
           - app: grainulator
-            version: "3.0.1"
+            version: "3.2.0"
     env:
       HOMEBREW_NO_AUTO_UPDATE: "1"
       HOMEBREW_NO_INSTALL_CLEANUP: "1"
@@ -89,7 +89,7 @@ jobs:
         run: brew uninstall "grainulation/homebrew/$APP"
 
   upgrade:
-    name: Grainulator 3.0.0 to 3.0.1 / macOS ARM64
+    name: Grainulator 3.0.1 to 3.2.0 / macOS ARM64
     runs-on: macos-15
     timeout-minutes: 25
     env:
@@ -104,10 +104,10 @@ jobs:
           brew tap grainulation/homebrew "$GITHUB_WORKSPACE"
           tap=$(brew --repository grainulation/homebrew)
           cp "$tap/Formula/grainulator.rb" "$RUNNER_TEMP/grainulator-next.rb"
-          curl --fail --silent --show-error --location https://raw.githubusercontent.com/grainulation/homebrew/7aea040ba78cab30c8c8ff4d201a9885b2dd7360/Formula/grainulator.rb --output "$tap/Formula/grainulator.rb"
-          ruby -rdigest -e 'abort "Previous formula changed" unless Digest::SHA256.file(ARGV.fetch(0)).hexdigest == "05341d610d9c3f2efb788a32cee273e93591cd9abc4d17ea0c0073fc3db9842f"' "$tap/Formula/grainulator.rb"
+          curl --fail --silent --show-error --location https://raw.githubusercontent.com/grainulation/homebrew/dc7ea2bd4fb334de4c6f0c0a9e797a8eeabc0198/Formula/grainulator.rb --output "$tap/Formula/grainulator.rb"
+          ruby -rdigest -e 'abort "Previous formula changed" unless Digest::SHA256.file(ARGV.fetch(0)).hexdigest == "42efc3c0d536c73f33054d0367f8ed3000a889b89d3bf6f2db9e7ac8ad094bb4"' "$tap/Formula/grainulator.rb"
           brew install grainulation/homebrew/grainulator
-          test "$(grainulator version)" = "3.0.0"
+          test "$(grainulator version)" = "3.0.1"
           grainulator doctor --json
       - name: Prepare user data and stable MCP registration
         run: |
@@ -131,7 +131,7 @@ jobs:
           brew upgrade grainulation/homebrew/grainulator
           brew cleanup --prune=all grainulation/homebrew/grainulator
           test ! -e "$old_prefix"
-          test "$(grainulator version)" = "3.0.1"
+          test "$(grainulator version)" = "3.2.0"
           grainulator doctor --json
           brew test --verbose grainulation/homebrew/grainulator
       - name: Verify preserved data and usable MCP launcher after cleanup
@@ -152,8 +152,8 @@ jobs:
           assert.deepEqual(current,previous,'Stable MCP registration changed');
           assert.match(current.command,/\/opt\/grainulator\/bin\/grainulator$/);
           assert.doesNotMatch(current.command,/\/Cellar\//);
-          assert.match(execFileSync(current.command,[...current.args,'--help'],{encoding:'utf8'}),/One local stdio MCP server/);
-          console.log('PASS public-archive 3.0.0→3.0.1 upgrade, old-keg cleanup, exact user-data preservation and stable MCP launcher');
+          assert.match(execFileSync(current.command,[...current.args,'--help'],{encoding:'utf8'}),/One local stdio server: legacy29 tools \(default\), compact15 tools;7 resources/);
+          console.log('PASS public-archive 3.0.1→3.2.0 upgrade, old-keg cleanup, exact user-data preservation and stable MCP launcher');
           JS
       - name: Inspect installed Grainulator after failure
         if: failure()
